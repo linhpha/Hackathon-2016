@@ -1,0 +1,18 @@
+{
+    "contents" : "\n\ndataInput <- subset(binding2, is.na(binding2[,c('Turkey')]) == 0)[,c(\"ingredient.x\",\"ingredient.y\",\"Turkey\")]\nnodes <- data.frame(id=attributes$Ingredients,\n                    label=attributes$Ingredients,\n                    group = attributes$Category,\n                    size = attributes[,c('Turkey')] * 250,\n                    stringsAsFactors = F)\nnodes <- nodes[nodes$size > 0.0,]\n\n#Create links with from, to, foo\nlinks <- dataInput\ncolnames(links) <- c(\"from\",\"to\",\"foo\")\nlinks <- links[links$foo >= quantile(links$foo,.75),] #only use 95% of the eges\nlinks$value <- links$foo*100\n\nvisNetwork(nodes, links, directed = F) %>%\n  visInteraction(dragNodes = TRUE,\n                 dragView = TRUE,\n                 zoomView = TRUE,\n                 hideEdgesOnDrag = TRUE) %>% \n  visPhysics(solver = \"barnesHut\", \n             barnesHut = list(gravitationalConstant = -500, \n                              springConstant = 0.02,\n                              avoidOverlap = 1),\n             stabilization = list(enabled = T,\n                                  iterations = 500)) %>%\n  visOptions(\n    selectedBy = \"group\"\n  ) %>%\n  visLayout(randomSeed = 123,\n            improvedLayout = T) %>%\n  visNodes(shape = \"dot\", \n           color = list(hover = \"red\")\n           \n  ) %>%\n  visEdges(\n    color = list(color=\"light blue\", highlight = \"red\"))",
+    "created" : 1475987850621.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "4148367211",
+    "id" : "981C85EB",
+    "lastKnownWriteTime" : 4299745376,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\nrequire(visNetwork)\nrequire(igraph)\nlibrary(reshape2)\nlibrary(plotly)\n\n### Prepare Data Input\n# data: binding2, attributes (prop.attributes), categoryProp\nattributes1 <- read.csv(\"data/attributes.csv\", stringsAsFactors = F)\nattributes <- attributes[-1]\nbinding2 <- read.csv(\"data/binding2.csv\", stringsAsFactors = F)\nbinding2 <- binding2[-1]\ncountry <- colnames(attributes)[3:length(attributes)]\ncategory.Prop <- read.csv(\"data/category.Prop.csv\", stringsAsFactors = F)\ncategory.Prop <- category.Prop[-1]\nNum <- read.csv(\"data/Number-of-recipes.csv\", stringsAsFactors=FALSE)\nNum <- Num[, 2:3]\n\nshinyUI(\n  fluidPage(\n\n  # Application title\n  titlePanel(\"Food Corner\"),\n  \n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(\n      helpText(\"This app visualizes how each cuisine combines ingredients.\"),\n      helpText(\"Our dataset includes 50K recipes all over the world \"),\n      selectizeInput('cuisine', \n                     label = \"Choose one cuisine of your preference:\",\n                     choices = country,\n                     multiple = FALSE)\n    )\n  ,\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      fluidPage(\n        visNetworkOutput(\"network\", height = \"400px\"),\n        helpText(\"Average Distribution of Food Categories in 1 Recipe of This Cuisine\"),\n        textOutput(\"text1\"),\n        plotlyOutput(\"category\", height = \"300px\")\n    )\n  )\n)))\n",
+    "created" : 1477087223499.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1730915533",
+    "id" : "3BC7C142",
+    "lastKnownWriteTime" : 1477089342,
+    "last_content_update" : 1477089342318,
+    "path" : "C:/Users/Linh/Desktop/foodrecipe/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

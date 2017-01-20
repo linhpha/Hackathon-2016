@@ -1,0 +1,18 @@
+{
+    "contents" : "# Produce recipe\ninstall.packages('plyr')\nlibrary(plyr)\nrecipe <- rbind.fill(allr,menu)\nwrite.csv(recipe,\"recipe.csv\") ## Linh's code to clean recipe\n\n\n# binding2: Remove duplicates and create undirected network\nbinding <- read.csv(\"data/binding.csv\", stringsAsFactors = F)\nbinding <- binding[-1]\nlibrary(reshape2)\nbinding2 <- dcast(binding, ingredient.x + ingredient.y ~ country.x)\nfor (i in 1:nrow(binding2))\n{\n  binding2[i,c(1,2)] = sort(binding2[i,c(1,2)]) #quite slow\n}\nbinding2 <- binding2[!duplicated(binding2[,c(1,2)]),]\nwrite.csv(binding2,\"data/binding2.csv\")\n\n#attributes: node attributes\nattributes <- read.csv(\"data/attributes.csv\", stringsAsFactors = F)\n\n#category.Prop\nattributes <- attributes[-1]\nx <- list()\nx[[1]] <- unique(attributes[[2]])\nfor (i in 3:ncol(attributes))\n{\n  x[[i-1]] <- aggregate(attributes[[i]], by = list(attributes$Category), sum)[[2]]\n}\n\nc <- colnames(attributes)[3:ncol(attributes)]\ncategory.Prop <- do.call(\"cbind.data.frame\", x)\ncolnames(category.Prop) <- c(\"Ingredients\", c)\nOther <- category.Prop[7,]\ncategory.Prop <- category.Prop[-7,]\ncategory.Prop <- category.Prop[order(category.Prop$Ingredients,decreasing = T),]\ncategory.Prop <- rbind(Other,category.Prop)\nwrite.csv(category.Prop, \"data/categoryProp.csv\")\n",
+    "created" : 1475948227242.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2165201798",
+    "id" : "3B3DBE73",
+    "lastKnownWriteTime" : 1476031261,
+    "path" : "~/Documents/Activities/foodrecipe/data/data-produce.R",
+    "project_path" : "data/data-produce.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

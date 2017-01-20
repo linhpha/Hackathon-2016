@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\ncountry <- unique(recipe$V1)\ncountry <- as.matrix(country)\ndataSubset <- data.frame()\n\n\nfor(j in 1:44) {\n  name <- country[j]\n  dataSubse <- recipe[recipe$V1 == name,]\n  write.csv()\n}\n\n\ndataSubset <- split(recipe, recipe$V1)  \n  \n\nfor (i in 1: ncol(recipe))\n  for (j in 1: nrow(recipe))\n    recipe[j,i] <- as.character(recipe[j,i])\n\n\nname <- country[1]\n\n\nx <- recipe[, -1]\nx <- x[, -1]\nView(x)\ny <- as.matrix(unique(unlist(x)))\ny\n\n\n#find the number of columns\n\ncolMax <- function(data ) {\n  colMax = 1\n  while (data[1,colMax] != \"\") {\n  colMax = colMax + 1\n  }\n  colMax - 1\n}\n    \n\n\napplyFunction <- function(data){\n  z <- data.frame(id = data[1, 1], ingredient = as.character(data[1, c(3:colMax(data[1,]))])) \n  for( i in 2 : nrow(data)) {\n    a <- data.frame(id = data[i, 1], ingredient = as.character(data[i, c(3:colMax(data[i,]))]))\n    z <- rbind(z,a)\n  }\n  z\n}\n\n\n#Code to create a list of data frame of ID and ingredients\nout <- list()\nfor( i in 26: 30){\n  out[[1]] <- applyFunction(dataSubset[[1]])\n}\n\nfun <- applyFunction(dataSubset[[1]][1:5000,])\nfun2 <- applyFunction(dataSubset[[1]][5001:10000,])\nfun3 <- applyFunction(dataSubset[[1]][10001:15000,])\nfun4 <- applyFunction(dataSubset[[1]][15001:16000,])\nfun5 <- applyFunction(dataSubset[[1]][16001:17000,])\nfun6 <- applyFunction(dataSubset[[1]][17001:18000,])\nfun7 <- applyFunction(dataSubset[[1]][18001:19000,])\nfun8 <- applyFunction(dataSubset[[1]][19001:25000,])\nfun9 <- applyFunction(dataSubset[[1]][25001:30000,])\nfun10 <- applyFunction(dataSubset[[1]][30001:35162,])\n\napplyFunction(dataSubset[[2]])\n\n\n#Merge code\ncombo <- list()\n\ncombo[[i]] <- subset(merge(out[[i]], out[[i]], by.x = \"id\", by.y = \"ID\"), ingredient.x != ingregient.y)\ncombo[[1]] <- subset(merge(out[[2]], out[[2]], by.x = \"id\", by.y = \"id\"), ingredient.x != ingredient.y)\n\n\n`#Trang's code \ncombo[[i]] <- subset(merge(oitem1[[i]][oitem1[[i]]$button_name %!in% c('Water','No Drink','No Dressing'),c(\"button_name\",\"order_id\",\"type\")],\n                           oitem1[[i]][oitem1[[i]]$button_name %!in% c('Water','No Drink','No Dressing'),c(\"button_name\",\"order_id\",\"type\")],\n                           by.x = \"order_id\", by.y = \"order_id\"),\n                     button_name.x != button_name.y & type.x != type.y)\n\ncombo_edgelist[[2]]$source_support <- mapply(function(x) round(x/totalorder*100,5),combo_edgelist[[2]]$source_order)\ncombo_edgelist[[2]]$target_support <- mapply(function(x) round(x/totalorder*100,5),combo_edgelist[[2]]$target_order)\ncombo_edgelist[[2]]$confidence <- mapply(function(x,y) round(x/y*100,5), \n                                         combo_edgelist[[2]]$Weight,combo_edgelist[[2]]$source_order)\ncombo_edgelist[[2]]$lift <- mapply(function(x,y) x/y,\n                                   combo_edgelist[[2]]$confidence, combo_edgelist[[2]]$target_support)\n\n",
+    "created" : 1477088199043.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "131137160",
+    "id" : "307C6C41",
+    "lastKnownWriteTime" : 1475962213,
+    "last_content_update" : 1475962213,
+    "path" : "~/Hackathon/Other/testCode.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

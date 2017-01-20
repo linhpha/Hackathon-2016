@@ -1,0 +1,17 @@
+{
+    "contents" : "library(shiny)\n\nshinyUI(\n  fluidPage(\n\n  # Application title\n  titlePanel(\"Food Corner\"),\n  \n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(\n      helpText(\"This app visualizes how each cuisine combines ingredients.\"),\n      helpText(\"Our dataset includes 50K recipes all over the world \"),\n      selectizeInput('cuisine', \n                     label = \"Choose one cuisine of your preference:\",\n                     choices = as.vector(country),\n                     multiple = FALSE)\n    )\n  ,\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      fluidPage(\n        visNetworkOutput(\"network\", height = \"400px\"),\n        helpText(\"Average Distribution of Food Categories in 1 Recipe of This Cuisine\"),\n        plotlyOutput(\"category\", height = \"300px\")\n    )\n  )\n)))\n",
+    "created" : 1475939993743.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1100774137",
+    "id" : "EB2DC5C5",
+    "lastKnownWriteTime" : 1476031360,
+    "path" : "~/Documents/Activities/foodrecipe/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
